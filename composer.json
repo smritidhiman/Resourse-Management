@@ -1,6 +1,7 @@
 {    
     "require": {       
         "zendframework/zendframework1": "1.12.7",
-		"doctrine/doctrine-orm-module": "0.7"		
+        "doctrine/orm": "2.1.7",
+        "symfony/console": "2.7.3"
     }    
 }
