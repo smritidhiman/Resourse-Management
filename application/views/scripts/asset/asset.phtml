@@ -1,0 +1,101 @@
+<html>
+	<head>
+		<title>Asset Form</title>
+		<style>
+
+</style>
+	</head>
+	<body>
+		<?php 
+		echo $this->asset->renderForm(false);
+		//print_r($this->detailname->getDateOfJoining()->format('Y-m-d')); exit;
+		
+		
+		// echo  $this->asset->empName->renderViewHelper(); ?>
+		<!--<form name="assetForm" action="" method="post" enctype="multipart/form-data" onsubmit="">-->
+		<h1 align="center"><u>Employee Asset Form</u></h1>
+		<table cellpadding="1" cellspacing="1">
+				<tr>
+					<td>Employee Name:</td><td> <?php  $this->asset->empName->setValue($this->detailname->getEmpName()); echo  $this->asset->empName->renderViewHelper(); ?> </td> 
+				</tr>
+				<tr>
+					<td>Employee Code:</td><td> <?php $this->asset->empCode->setValue($this->detailname->getEmpCode());  echo  $this->asset->empCode->renderViewHelper(); ?> </td>
+				</tr>
+				<tr>
+					<td>Employee Designation:</td><td><?php  $this->asset->empDesignation->setValue($this->detailname->getEmpDesignation());  echo  $this->asset->empDesignation->renderViewHelper(); ?> </td>
+				</tr>
+				<tr>
+					<td>Date of Joining:</td><td> <?php   $this->asset->empDateOfJoining->setValue($this->detailname->getDateOfJoining()->format('d-m-Y'));   echo  $this->asset->empDateOfJoining->renderViewHelper(); ?></td>   <?php //$this->asset->empDateOfJoining->setValue($this->detailname->getDateOfJoining());ff ?>
+				</tr>
+				<tr>
+					<td>Date of Resign:</td><td> <?php  echo  $this->asset->empDateOfResign->renderViewHelper(); ?>  </td>
+				</tr>
+				<tr>
+					<td>Last Day of Working:</td><td> <?php  echo  $this->asset->lastDayofWorking->renderViewHelper(); ?> </td>
+				</tr>
+				<tr>
+					<td>Reporting Head:</td><td> <?php if( isset($this->rhDesignation[0])){$this->asset->reportingHead->setValue($this->rhDesignation[0]);}  echo  $this->asset->reportingHead->renderViewHelper(); ?>  </td>
+				</tr>
+				<tr>
+					<td> Reporting Head's Designation:</td><td>  <?php if( isset($this->rhDesignation[1])){$this->asset->reportingHeadDesignation->setValue($this->rhDesignation[1]);} echo  $this->asset->reportingHeadDesignation->renderViewHelper(); ?></td>
+				</tr>
+		</table>
+		<?php //print_r($this->assetname);?>	
+	
+		<h3>Please fill the details against the Assets to be provided to the New Joinee this would be a part of the employee personal file & would be referred in case the employee resigns from his duties :</h3>
+		<table border="1" style="width:100%" cellpadding="0" cellspacing="1">
+				<tr>
+					<td>Sr. No.</td>
+					<td>Asset Description</td>
+					
+					<td>Technical details About Asset or Any other Information</td>
+					<td>Signature during the Receipt of the Asset </td>
+					<td>Signature when Asset is Handed Over  </td>
+				</tr>
+			<?php	foreach($this->assetname as $key=>$assetName)
+				{
+					
+				?>
+				<?php $id=$assetName->getAssetId();
+					
+				?>
+				<tr>
+					<td><?php echo($key+1) ?> </td>
+					<td> <?php echo($assetName->getAssetName()); ?> </td>
+					<td> <?php $this->asset->tech_details->setAttrib('name','tech_details_'.$id); $this->asset->tech_details->setAttrib('id','tech_details_'.$id); echo($this->asset->tech_details->renderViewHelper()); ?> </td>
+					<td> <?php $this->asset->receiptOfAsset->setAttrib('name','receiptOfAsset_'.$id); $this->asset->receiptOfAsset->setAttrib('id','receiptOfAsset_'.$id); echo  $this->asset->receiptOfAsset->renderViewHelper(); ?></td>
+					<td> <?php $this->asset->assetHandedOver->setAttrib('name','assetHandedOver_'.$id); $this->asset->assetHandedOver->setAttrib('id','assetHandedOver_'.$id); echo  $this->asset->assetHandedOver->renderViewHelper(); ?>  </td>
+				</tr>
+	<?php	} ?>
+				
+			
+		</table>
+		<br>
+		<br>
+	
+		<!-- <table>
+			<tr>
+				<td>Approved By :</td>
+				<td></td><td>Copy With :</td>
+				<td></td><td>Copy With :</td>
+			</tr>
+			<tr>
+				<td>Reporting Head: </td><td> <?php // echo  $this->asset->appRH->renderViewHelper(); ?> </td>
+				<td>IT:				</td><td>  <?php // echo  $this->asset->appIT->renderViewHelper(); ?> </td>
+				<td>HR: 			</td><td> <?php // echo  $this->asset->appHR->renderViewHelper(); ?>  </td>
+			</tr> -->
+			<?php   echo  $this->asset->saveData->renderViewHelper(); echo $this->detailtechreceipt;?>
+			<a href="<?php echo $this->baseUrl("login/login"); ?>">Logout</a> <br>
+			<br>
+			<br>
+		<table>
+			<tr>
+				<td></td><td> <?php  echo  $this->asset->submitRH; ?> 			</td>
+				<td></td><td>	<?php  echo  $this->asset->submitIT; ?> 		</td>
+				<td></td><td><?php  echo  $this->asset->submitHR; ?> 			 </td>
+					
+			</tr>
+		</table>
+	</body>
+<html>
+	
